@@ -16,12 +16,13 @@ pipeline {
         }
         stage('Test') {
                     steps {
-                        sh "chmod +x ./jenkins/scripts/test.sh"
+                        sh "chmod -R +x ./jenkins/scripts/"
                         sh './jenkins/scripts/test.sh'
                     }
                 }
                 stage('Deliver') {
                             steps {
+                               
                                 sh './jenkins/scripts/deliver.sh'
                                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
                                 sh './jenkins/scripts/kill.sh'
