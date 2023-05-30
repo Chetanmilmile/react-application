@@ -14,6 +14,8 @@ pipeline {
                 sh 'npm install'
             }
         }
+
+
         // stage('Test') {
         //             steps {
         //                 sh "chmod -R +x ./jenkins/scripts/"
@@ -29,5 +31,12 @@ pipeline {
         //                     }
         //                 }
 
+        
+    post {
+        always {
+            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+            junit 'build/reports/**/*.xml'
+        }
+    }
     }
 }
