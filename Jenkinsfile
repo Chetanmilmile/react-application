@@ -15,6 +15,9 @@ pipeline {
             steps {
                 sh 'npm install'
             }
+            steps {
+                sh 'npm build'
+            }
         }
 
 
@@ -36,7 +39,7 @@ pipeline {
         }
     post {
         always {
-            archiveArtifacts artifacts: 'build/libs/', fingerprint: true
+            archiveArtifacts artifacts: 'dist/*.*', fingerprint: true
             // junit 'build/reports/**/*.xml'
         }
     }
